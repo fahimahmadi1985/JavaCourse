@@ -1,4 +1,5 @@
-import java.sql.SQLOutput;
+import java.util.ArrayList;
+
 
 public class Main{
     public static void main(String args[]){
@@ -95,5 +96,127 @@ public class Main{
         z += 5;     // shorhand format for z = z + 5;
         System.out.println("z: "+ z);
 
+
+
+        // if statement
+        if(20 > 10){
+            System.out.println("20 is greater than 10");
+        } else{
+            System.out.println("10 is greater than 20");
+        }
+
+        // truthy values in java
+        int     number = 10;
+        String  text = "hello";
+        Object[] array = new Object[1];
+        Object nullObj = null;
+        if(true){
+            System.out.println("if block executed");
+        }else {
+            System.out.println("else block executed");
+        }
+
+        // ternary operator
+        // a shortcut to assign one of two values to a variable, depending on a given condition.
+        int max = (10 > 20) ? 10 : 20;
+        System.out.println("max is: "+ max);
+
+        // invoke a method
+        greeting("fahim");
+        System.out.println("average 4,2 is: "+ calculate(4,2));
+        int[] evenNums = getEvenNumbers(5);
+        System.out.println("even numbers started from 5: "+ java.util.Arrays.toString(evenNums));
+
+
+        //instance of another class
+        Car myCar = new Car("BMW", "Black", 0);
+        myCar.accelerate();
+        myCar.accelerate();
+        myCar.addOwner("fahim");
+        myCar.addOwner("daniel");
+        System.out.println(String.join(", ", myCar.owners));
+
+        displayHighScorePosition("fahim", 3);
+        System.out.println(calculateHighScorePosition(1620));
+
+        // use a class from another file in the same directory
+        Bike bike = new Bike("Honda");
+        System.out.println("brand of the bike is: "+ bike.getBrand());
+
+    }
+
+    // define a custom method.
+    // remember about datatype of return value, parameters
+    public static void greeting(String name){
+        System.out.println("Hello "+ name);
+    }
+
+    public static int calculate(double a, double b){
+        return (int) ((a + b) / 2);
+    }
+
+    // define a method contains loops and ternary
+    public static int[] getEvenNumbers(int min){
+        int[] evenNumbers = new int[10];
+        int nextEven = min%2 == 0 ? min + 2: min + 1;
+        for(int i= 0; i< 10; i++){
+            evenNumbers[i] = nextEven;
+            nextEven += 2;
+        }
+
+        return evenNumbers;
+    }
+
+    //method challenge 1
+    public static void displayHighScorePosition(String name, int positionInHighScoreList){
+        System.out.println(name + " managed to get into position "+ positionInHighScoreList + " in the high score list.");
+    }
+
+    //method challenge 2
+    public static byte calculateHighScorePosition(int playersScore){
+        if(playersScore >= 1000)
+            return 1;
+
+        if(500 < playersScore && playersScore <= 1000)
+            return 2;
+
+        if(100 <= playersScore && playersScore <= 500)
+            return 3;
+
+        return 4;
+
+    }
+
+}
+
+// definition of class Car
+class Car{
+    String brand = "";
+    String color = "";
+    int curSpeed = 0;
+    ArrayList<String> owners = new ArrayList<String>();
+
+    public Car(String brand, String color, int curSpeed){
+        this.brand = brand;
+        this.color = color;
+        this.curSpeed = curSpeed;
+    }
+
+    public void printCarBrand(){
+        System.out.println("Car brand is: "+ this.brand);
+    }
+
+    public String getColor(){
+        return this.color;
+    }
+
+    public void accelerate(){
+        this.curSpeed += 10;
+        System.out.println("the current speed is: "+ this.curSpeed);
+    }
+
+    public void addOwner(String newOwner){
+        this.owners.add(newOwner);
+        System.out.println(owners.toString());
     }
 }
